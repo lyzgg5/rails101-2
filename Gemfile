@@ -41,6 +41,7 @@ group :development, :test do
 end
 gem 'bootstrap-sass'#穿上衣服 Bootstrap
 gem 'simple_form'#簡化表單
+gem 'devise'# 安装登录系统
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
