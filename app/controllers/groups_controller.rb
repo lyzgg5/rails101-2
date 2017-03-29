@@ -17,15 +17,22 @@ class GroupsController < ApplicationController
 
   def create
     @group =Group.new(group_params)
-    @group.save
 
-    redirect_to groups_path
+    #判斷不得為空白
+    if @group.save
+      redirect_to groups_path
+    else
+      render :new
+    end
+
   end
   def update
     @group =Group.find(params[:id])
-    @group.update(group_params)
-
-    redirect_to groups_path, notice: "Update Success更新成功"
+    if @group.update(group_params)
+      redirect_to groups_path, notice: "Update Success更新成功"
+    else
+      render :edit
+    end
   end
 
   def destroy
