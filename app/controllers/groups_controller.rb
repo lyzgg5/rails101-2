@@ -28,6 +28,13 @@ class GroupsController < ApplicationController
     redirect_to groups_path, notice: "Update Success更新成功"
   end
 
+  def destroy
+    @group =Group.find(params[:id])
+    @group.destroy
+
+    redirect_to groups_path, alert: "Group deleted 討論已刪除"
+  end
+
 private#私自定義
   def group_params
     params.require(:group).permit(:title, :description)
