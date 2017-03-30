@@ -8,6 +8,12 @@ class User < ApplicationRecord
   has_many :posts
   has_many :groups
 
-  has_many :groups_relationships
-  has_many :participated_groups, :through ==> :groups_relationships, :source => :group
+  has_many :group_relationships
+  has_many :participated_groups, :through => :group_relationships, :source => :group
+
+#判斷是否為群組的一份子
+    def is_member_of?(group)
+      participated_groups.include?(group)
+    end
+
 end
