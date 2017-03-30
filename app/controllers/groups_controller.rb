@@ -22,6 +22,7 @@ class GroupsController < ApplicationController
     @group.user = current_user
     #判斷不得為空白
     if @group.save
+      current_user.join!(@group)#建立新的討論時同時加員為此討論成員
       redirect_to groups_path
     else
       render :new
