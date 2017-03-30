@@ -42,7 +42,28 @@ class GroupsController < ApplicationController
     redirect_to groups_path, alert: "Group deleted 討論已刪除"
   end
 
+def join
+  @group = Group.find(params[:id])
 
+  if !current_user.is_member_of?(@grouop)
+    current_user.join!(@group)
+    flash[:notice] = "加入本討論成功!"
+  else
+    flash[:warning] = "你已經是本討論版成員!"
+  end
+  redirect_to group_path(@group)
+end
+
+def quit
+  @group = Group.find(params[:id])
+  if current_user.is_member_of?(@group)
+    current_user.quit!(@group)
+    flash[:alert] = "已退出本討論!"
+  else
+    flash[:warning] = "你不是本討論版成員，怎麼退"
+  end
+  redirect_to group_path(@group)
+end
 
 private#私自定義
   def group_params
